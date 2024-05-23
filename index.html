@@ -35,7 +35,7 @@
             transform: translate(-50%, -50%);
             width: 50px;
             height: 50px;
-            background-color: rgb(0, 0, 0);
+            background-color: rgba(255,253,253,0.59);
             border-radius: 10%;
             border: none;
             cursor: url('https://n3wgr1d.github.io/__III_III__/_assets/circle-322.ico'), auto;
@@ -88,7 +88,7 @@
             text-align: left;
             overflow-y: auto;
         }
-		 #threejs-viewer {
+	#threejs-viewer {
             position: fixed;
             top: 0;
             right: 0;
@@ -343,14 +343,14 @@
             this.echo(greeting + '\n');
         },
         help: function() {
-            this.echo('\n' + separateLine + "\nAvailable commands: \n\n   - [[;black;]help] - List of commands.\n   - [[;black;]whoami] - Learn about [[;red;]GRID].\n   - [[;black;]projects] - List of projects.\n   - [[;black;]links] - Socials and Contact.\n   - [[;#000000;]hours] - Hours of operation.\n   - [[;#2FFF00;]return] - Return to the main page.\n   - [[;red;]clear] - Clear the page.\n" + separateLine);
+            this.echo('\n' + separateLine + "\nAvailable commands: \n\n   - [[;black;]help] - List of commands.\n   - [[;black;]visuals] - Funny page with my visuals(to view fullres go to links/patreon.\n   - [[;black;]whoami] - Learn about [[;red;]GRID].\n   - [[;black;]projects] - List of projects.\n   - [[;black;]links] - Socials and Contact.\n   - [[;#000000;]hours] - Hours of operation.\n   - [[;#2FFF00;]return] - Return to the main page.\n   - [[;red;]clear] - Clear the page.\n" + separateLine);
         },
         projects: function() {
             this.echo(separateLine + '\n');
             this.echo('[[;#000000;]Projects:]\n\n  [[;#2FFF00;]AUDIO]         [[;#2FFF00;]MUSIC]        [[;#2FFF00;]CONCEPTS]');
 			this.echo(separateLine);
-            this.echo("[[;red;][[!;;;;http://example.com/product1]PROJECTION]]     [[;red;][[!;;;;http://example.com/product1]MARPHIN]]      [[;red;][[!;;;;http://example.com/product1]XENOLITH]]");
-            this.echo("[[;red;][[!;;;;http://example.com/product1]MINI_SETUP]]      [[;red;][[!;;;;http://example.com/product1]GRID]]           [[;red;][[!;;;;http://example.com/product1]BBNG]]");
+            this.echo("[[;red;][[!;;;;http://example.com/product1]PROJECTION]]     [[;red;][[!;;;;http://example.com/product1]MARPHIN]]       [[;red;][[!;;;;http://example.com/product1]XENOLITH]]");
+            this.echo("[[;red;][[!;;;;http://example.com/product1]MINI_SETUP]]      [[;red;][[!;;;;http://example.com/product1]GRID]]          [[;red;][[!;;;;http://example.com/product1]BBNG]]");
             this.echo("[[;red;][[!;;;;http://example.com/product1]INSTALL_1]]       ");
 	    this.echo("   [[;red;][[!;;;;http://example.com/product1]MWI]]");             
             this.echo(separateLine);
@@ -394,7 +394,10 @@
             this.echo('               [[;red;]Monday - Sunday, 9 PM - 9 PM.]');
             this.echo(separateLine + '\n');
         },
-		return: function() {
+	visuals: function() {
+                    window.open("_assets/Gallery/gallery.html", "_blank", "fullscreen=yes");
+                },
+	return: function() {
             $('#overlay').css({
             opacity: '0',
             visibility: 'hidden'
