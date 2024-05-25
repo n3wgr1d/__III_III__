@@ -395,10 +395,7 @@
             this.echo(separateLine + '\n');
         },
 	visuals: function() {
-                    const galleryWindow = window.open("https://n3wgr1d.github.io/__III_III__/_assets/Gallery/gallery.html", "_blank");
-                    galleryWindow.onload = function() {
-                        galleryWindow.document.body.requestFullscreen();
-                    };
+                    window.open("gallery.html", "_blank", "fullscreen=yes");
                 },
 	return: function() {
             $('#overlay').css({
