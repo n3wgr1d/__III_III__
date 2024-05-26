@@ -343,7 +343,7 @@
             this.echo(greeting + '\n');
         },
         help: function() {
-            this.echo('\n' + separateLine + "\nAvailable commands: \n\n   - [[;black;]help] - List of commands.\n   - [[;black;]visuals] - To view fullres go to links/patreon.\n   - [[;black;]whoami] - Learn about [[;red;]GRID].\n   - [[;black;]projects] - List of projects.\n   - [[;black;]links] - Socials and Contact.\n   - [[;#000000;]hours] - Hours of operation.\n   - [[;#2FFF00;]return] - Return to the main page.\n   - [[;red;]clear] - Clear the page.\n" + separateLine);
+            this.echo('\n' + separateLine + "\nAvailable commands: \n\n   - [[;black;]help] - List of commands.\n   - [[;black;]visuals] - To view fullres go to links/patreon.\n   - [[;black;]whoami] - Learn about [[;red;]GRID].\n   - [[;black;]projects] - List of projects.\n   - [[;black;]contact] - Socials and Contact.\n   - [[;#000000;]hours] - Hours of operation.\n   - [[;#2FFF00;]return] - Return to the main page.\n   - [[;red;]clear] - Clear the page.\n" + separateLine);
         },
         projects: function() {
             this.echo(separateLine + '\n');
@@ -352,7 +352,7 @@
             this.echo("[[;red;][[!;;;;https://ody.sh/ADjqA82Aly]PROJECTION]]     [[;red;][[!;;;;http://example.com/product1]MARPHIN]]       [[;red;][[!;;;;http://example.com/product1]XENOLITH]]");
             this.echo("[[;red;][[!;;;;http://example.com/product1]MINI_SETUP]]      [[;red;][[!;;;;http://example.com/product1]GRID]]           [[;red;][[!;;;;http://example.com/product1]BBNG]]");
             this.echo("[[;red;][[!;;;;http://example.com/product1]INSTALL_1]]       ");
-	    this.echo("   [[;red;][[!;;;;http://example.com/product1]MWI]]");             
+	    this.echo("   [[;red;][[!;;;;_assets/SPIRAL.pdf]MWI]]");             
             this.echo(separateLine);
 			this.echo('[[;#000000;]I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I-I]');
 			this.echo(separateLine + '\n');
@@ -366,15 +366,14 @@
                 this.error('\nCommand not found: ' + command + '\n');
             }
         },
-        links: function() {
+        contact: function() {
             this.echo('\n' + separateLine);
-            this.echo("[[;red;][[!;;;;mailto:40grid40@gmail.com?subject=Contact%20Me&body=Hello,%20I%20would%20like%20to%20get%20in%20touch%20with%20you.]MAIL]]");
+            this.echo("[[;red;][[!;;;;mailto:n3wgr1d@tuta.io]MAIL]]");
             this.echo("[[;red;][[!;;;;https://www.instagram.com/new__grid?igsh=dGU2NWV5ZmoxZGlp]INST]]");
-	    this.echo("[[;red;][[!;;;;http://example.com/product1]MUSIC]]");
 	    this.echo("[[;red;][[!;;;;https://github.com/n3wgr1d]GIT]]");
 	    this.echo("[[;red;][[!;;;;https://patreon.com/new__grid?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink]PATREON]]");
             this.echo(separateLine);
-		this.echo("[[;red;]if the mail link doesn't work - 40grid40@gmail.com]");
+		this.echo("[[;red;]if the mail link doesn't work - n3wgr1d@tuta.io]");
 	    this.echo(separateLine + '\n');
         },
         whoami: function() {
