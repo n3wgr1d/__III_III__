@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @font-face {
+            font-family: 'Mixal';
+            src: url('_font/Mixal-ExtraBold.otf') format('opentype'),
+                 url('_font/MixalGX.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+        }
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333; /* Dark background to show screen effect */
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .coming-soon {
+            font-family: 'Mixal', Arial, sans-serif;
+            font-size: 6em;
+            font-weight: 800; /* Ensures Extra Bold weight is used */
+            color: white; /* White text to show screen effect */
+			filter: blur(1px);
+            position: relative;
+            z-index: 1;
+        }
+        .overlay {
+            position:fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('_font/overlay2.jpg');
+            background-size: cover;
+            mix-blend-mode: exclusion;
+            z-index: 0;
+            pointer-events: none; /* To ensure the overlay does not block interactions */
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="coming-soon">Coming Soon</div>
+</body>
+</html>
