@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BERLIN_TEST</title>
+    <style>
+        :root {
+            --h1-weight: normal;
+            --h1-size: 28px;
+            --p-padding: 0px;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden; /* This line removes the scrollbars */
+        }
+
+        body {
+            background-color: white;
+            color: green;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            color: rgba(225,0,0,1.00);
+            font-family: "Space Mono", monospace;
+            font-weight: normal;
+            font-style: normal;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .container h1 {
+            font-weight: normal;
+            font-size: 16px;
+            text-align: justify;
+        }
+
+        input[type="password"] {
+            background-color: white;
+            color: rgba(225,0,0,1.00);
+            padding: 5px;
+            font-family: "Space Mono", monospace;
+            font-weight: 0;
+            font-style: normal;
+            font-size: 13px;
+            border: 1px solid rgba(225,0,0,1.00);
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: white;
+            color: rgba(225,0,0,1.00);
+            padding: 10px;
+            font-family: "Space Mono", monospace;
+            font-weight: 100;
+            font-style: normal;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+        }
+
+        input[type="password"]:focus {
+            outline: none;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 20px;
+            font-family: "Space Mono", monospace;
+            font-weight: 0;
+            font-style: normal;
+            font-size: 13px;
+            color: rgba(233,233,233,1.00);
+            outline: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 1s ease;
+            text-align: left;
+        }
+
+        .overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .overlay h1 {
+            font-weight: var(--h1-weight);
+            font-size: var(--h1-size);
+        }
+
+        .overlay p {
+            padding: var(--p-padding);
+        }
+
+        .media-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .media-container img, .media-container video {
+            position: absolute;
+            max-width: 350px;
+            max-height: 200px;
+            border: 0.5px solid rgba(255,255,255,0.40);
+        }
+
+        .image1 { bottom: 10%; left: 0%; }
+        .image2 { bottom: 20%; left: 10%; }
+        .image3 { bottom: 30%; left: 27.5%; top:10%; }
+        .image4 { bottom: 43%; left: 27.5%; }
+        .image5 { bottom: 60%; left: 27.5%; }
+        .image6 { bottom: 70%; left: 51%; }
+        .image7 { bottom: 10%; left: 51%; }
+        .image8 { bottom: 80%; left: 74%; }
+		.image9 { bottom: 20%; left: 76%; }
+        .video1 { bottom: 150%; left: 70%; max-width: 500px; max-height: 400px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter password</h1>
+        <form id="passwordForm">
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="overlay" id="overlay">
+        <h1>Project Description:</h1>
+        <p>The goal of this project was to test my artistic project on the real environment but still on a very small scale.</p>
+        <p>The concept behind it was to create a immersive audio music performance with songs that were produced by me and my colleague.</p> 
+        <p>First test was conducted at home with 1st order Ambisonics(IEM). You can read more about it <a href="https://drive.google.com/file/d/1yP-3a9nqR9KZbzK0mgZ9LCfYxtFvNyR5/view" target="_blank">here</a>.</p>
+        <h1>Audio Setup:</h1>
+        <p>6 SOUNDBOKS Speakers; RME Fireface UCX; 4DSOUND software.</p>
+        <h1>Photos:</h1>
+        <div class="media-container">
+            <img src="Model/4D1.png" alt="Description of image 1" class="image1">
+            <img src="Model/4D2.png" alt="Description of image 2" class="image2">
+            <img src="Model/4DMax1.png" alt="Description of image 3" class="image3">
+            <img src="Model/4DMax2.png" alt="Description of image 4" class="image4">
+            <img src="Model/4DMax3.png" alt="Description of image 5" class="image5">
+            <img src="Model/Ableton1.png" alt="Description of image 6" class="image6">
+            <img src="Model/Ableton2.png" alt="Description of image 7" class="image7">
+            <img src="Model/JACK1.png" alt="Description of image 8" class="image8">
+			<img src="Model/JACK2.png" alt="Description of image 8" class="image9">
+            <video src="Model/Georg-von-Rauch-Haus.mp4" autoplay loop muted class="video1"></video>
+        </div>
+    </div>
+    <script>
+        document.getElementById('passwordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            if (password === 'iwannaseeit') {
+                document.getElementById('overlay').classList.add('visible');
+            } else {
+                alert('Access denied');
+            }
+        });
+    </script>
+</body>
+</html>
