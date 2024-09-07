@@ -1,14 +1,11 @@
 <!doctype html>
 <html>
 <head>
+    <!-- Fonts and Stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@100..900&family=Stick+No+Bills:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@100..900&family=Micro+5+Charted&family=Ojuju:wght@200..800&family=Stick+No+Bills:wght@200..800&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css" />
@@ -24,71 +21,8 @@
             overflow: hidden; /* Prevent scrolling on the body itself */
             cursor: url('https://n3wgr1d.github.io/__III_III__/_assets/move_red_cursor_32.png'), auto;
         }
-        a {
-            color: inherit; /* blue colors for links too */
-             text-decoration: inherit; /* no underline */
-         }
-        #openFullscreenPage {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255,253,253,0.99);
-            border-radius: 150%;
-            border: none;
-            cursor: url('https://n3wgr1d.github.io/__III_III__/_assets/circle-322.ico'), auto; 
-            transition: background-color 0.6s;
-            filter: blur(1px);
-            z-index: 5;
-        }
-	    @media (max-width: 768px) {
-        #openFullscreenPage {
-            box-shadow: none; /* Remove box shadow on mobile devices */
-        }
-    }
-        #overlay {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            cursor: crosshair;
-            backdrop-filter: blur(0px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-   /*     #staticContent {
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: rgba(0, 0, 0, 0.7); 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0px;
-            overflow: hidden;
-        }*/
-        .crt {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: rgba(249,242,242,1.00);
-            font-family: 'Courier New', Courier, monospace;
-            padding: 0px;
-            text-align: left;
-            overflow-y: auto;
-        }
-	#threejs-viewer {
+        /* Additional styles for terminal and second viewer */
+        #threejs-viewer {
             position: fixed;
             top: 0;
             right: 0;
@@ -96,25 +30,28 @@
             height: 100%;
             pointer-events: auto;
             z-index: 100000;
-            opacity: 0; /* Start with 0 opacity */
-            visibility: hidden; /* Start with hidden */
-            transition: opacity 0.5s ease, visibility 0.5s ease; /* Add transition for fading effect */
-        } 
+            opacity: 1; /* Set opacity to 1 to make it visible */
+            visibility: visible; /* Ensure it is visible */
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
     </style>
 </head>
 <body>
+    <!-- Second Three.js Viewer -->
+    <div id="threejs-viewer"></div>
+
+    <!-- Terminal Page -->
     <div id="overlay">
         <div id="staticContent">
-            <div id="terminal" class="crt">
-            </div>
-			<div id="threejs-viewer"></div>
+            <div id="terminal" class="crt"></div>
         </div>
     </div>
-    <button id="openFullscreenPage"></button>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
-    <script src="script.js"></script>
-    <script type="module">
+    <script>
+        // The first viewer's code is commented out to disable it temporarily
+        /*
         import {
             PerspectiveCamera, Scene, WebGLRenderer, ShaderMaterial, ObjectLoader,
             InstancedMesh, Matrix4, Vector3, PointLight, AmbientLight
@@ -133,8 +70,8 @@
             const radius = 2; // Distance from the origin
             camera.position.x = Math.sin(angle) * radius;
             camera.position.z = Math.cos(angle) * radius;
-            camera.position.y = 0; // Adjust y position if needed
-            camera.lookAt(new Vector3(0, 0, 0)); // Ensure camera is looking at the origin
+            camera.position.y = 0;
+            camera.lookAt(new Vector3(0, 0, 0));
 
             renderer = new WebGLRenderer({ antialias: true });
             renderer.setClearColor(0x000000);
@@ -147,12 +84,11 @@
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
 
-            // Add lighting
-            const pointLight = new PointLight(0xffffff, 10, 100); // Very bright light at the origin
-            pointLight.position.set(0, 0, 0); // Place it at the origin
+            const pointLight = new PointLight(0xffffff, 10, 100);
+            pointLight.position.set(0, 0, 0);
             scene.add(pointLight);
 
-            const ambientLight = new AmbientLight(0xffffff, 0.2); // Add some ambient light
+            const ambientLight = new AmbientLight(0xffffff, 0.2);
             scene.add(ambientLight);
 
             addModel();
@@ -169,7 +105,7 @@
         function addModel() {
             fetch("https://n3wgr1d.github.io/__III_III__/_assets/instances_deformed.json").then(r => r.json()).then(async instanceData => {
                 let [geometry, texture] = await new Promise(resolve => {
-              new ObjectLoader().load('https://n3wgr1d.github.io/__III_III__/_assets/white_sphere.json', mesh => {
+                    new ObjectLoader().load('https://n3wgr1d.github.io/__III_III__/_assets/white_sphere.json', mesh => {
                         resolve([mesh.geometry, mesh.material.map]);
                     });
                 });
@@ -198,7 +134,7 @@
                 });
 
                 let mesh = new InstancedMesh(geometry, material, instanceData.length);
-                let matrix = new Matrix4(1000); // init matrix to assign transforms
+                let matrix = new Matrix4(1000);
                 for (let i = 0; i < instanceData.length; i++) {
                     let inst = instanceData[i];
                     let pos = new Vector3(inst["tx"], inst["ty"], inst["tz"]);
@@ -212,13 +148,16 @@
         }
 
         function postUpdate(uuid, task) {
-            updateTasks[uuid] = task; // Each task runs every frame
+            updateTasks[uuid] = task;
         }
 
         function run() {
             for (let key in updateTasks) { updateTasks[key](); }
             requestAnimationFrame(run);
         }
+        */
+
+        // Initialize the second viewer and terminal directly
 		
 		
 		// Second viewer setup
