@@ -166,59 +166,59 @@
             run();
         }
 
-        function addModel() {
-            fetch("https://n3wgr1d.github.io/__III_III__/_assets/instances_deformed.json").then(r => r.json()).then(async instanceData => {
-                let [geometry, texture] = await new Promise(resolve => {
-                    new ObjectLoader().load('https://n3wgr1d.github.io/__III_III__/_assets/white_sphere.json', mesh => {
-                        resolve([mesh.geometry, mesh.material.map]);
-                    });
-                });
+   //     function addModel() {
+     //       fetch("https://n3wgr1d.github.io/__III_III__/_assets/instances_deformed.json").then(r => r.json()).then(async instanceData => {
+     //           let [geometry, texture] = await new Promise(resolve => {
+      //              new ObjectLoader().load('https://n3wgr1d.github.io/__III_III__/_assets/white_sphere.json', mesh => {
+      //                  resolve([mesh.geometry, mesh.material.map]);
+      //              });
+       //         });
 
-                let material = new ShaderMaterial({
-                    uniforms: {
-                        uTime: { type: 'f', value: 0 },
-                        uTexture: { type: 't', value: texture }
-                    },
-                    vertexShader: `
-                        uniform float uTime;
-                        out vec2 vUV;
-                        void main() {
-                            vUV = uv;
-                            vec3 pos = position + vec3(sin(uTime + float(gl_InstanceID)), 0., 0.);
-                            gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(pos, 1.0);
-                        }`,
-                    fragmentShader: `
-                        uniform float uTime;
-                        uniform sampler2D uTexture;
-                        in vec2 vUV;
-                        void main() {
-                            vec4 color = texture(uTexture, vUV);
-                            gl_FragColor = color;
-                        }`,
-                });
+       //         let material = new ShaderMaterial({
+       //             uniforms: {
+       //                 uTime: { type: 'f', value: 0 },
+       //                 uTexture: { type: 't', value: texture }
+       //             },
+       //             vertexShader: `
+       //                 uniform float uTime;
+       //                 out vec2 vUV;
+       //                 void main() {
+       //                     vUV = uv;
+       //                     vec3 pos = position + vec3(sin(uTime + float(gl_InstanceID)), 0., 0.);
+       //                     gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(pos, 1.0);
+       //                 }`,
+       //             fragmentShader: `
+       //                 uniform float uTime;
+       //                 uniform sampler2D uTexture;
+       //                 in vec2 vUV;
+       //                 void main() {
+       //                     vec4 color = texture(uTexture, vUV);
+       //                     gl_FragColor = color;
+       //                 }`,
+             //   });
 
-                let mesh = new InstancedMesh(geometry, material, instanceData.length);
-                let matrix = new Matrix4(1000); // init matrix to assign transforms
-                for (let i = 0; i < instanceData.length; i++) {
-                    let inst = instanceData[i];
-                    let pos = new Vector3(inst["tx"], inst["ty"], inst["tz"]);
-                    matrix.setPosition(pos);
-                    mesh.setMatrixAt(i, matrix);
-                }
+              //  let mesh = new InstancedMesh(geometry, material, instanceData.length);
+              //  let matrix = new Matrix4(1000); // init matrix to assign transforms
+              //  for (let i = 0; i < instanceData.length; i++) {
+                 //   let inst = instanceData[i];
+                 //   let pos = new Vector3(inst["tx"], inst["ty"], inst["tz"]);
+                 //   matrix.setPosition(pos);
+                 //   mesh.setMatrixAt(i, matrix);
+               // }
 
-                postUpdate(material.uuid, () => material.uniforms.uTime.value += 0.004);
-                scene.add(mesh);
-            });
-        }
+             //   postUpdate(material.uuid, () => material.uniforms.uTime.value += 0.004);
+           //     scene.add(mesh);
+         //   });
+        //}
 
-        function postUpdate(uuid, task) {
-            updateTasks[uuid] = task; // Each task runs every frame
-        }
+        //function postUpdate(uuid, task) {
+         //   updateTasks[uuid] = task; // Each task runs every frame
+        //}
 
-        function run() {
-            for (let key in updateTasks) { updateTasks[key](); }
-            requestAnimationFrame(run);
-        }
+       // function run() {
+      //      for (let key in updateTasks) { updateTasks[key](); }
+     //       requestAnimationFrame(run);
+    //    }
 		
 		
 		// Second viewer setup
@@ -284,7 +284,7 @@
         $('#terminal').terminal().clear();
         $('#terminal').terminal().exec('about');
         }
-    });
+   // });
 
          //jQuery for mouse movement effect on the button
 //         $(document).mousemove(function(e) {
