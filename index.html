@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css" />
     <link rel="stylesheet" href="style.css">
     <style>
-      /*  body {
+        body {
             margin: 0;
             height: 100vh;
             color: #fff;
@@ -22,12 +22,12 @@
             text-align: center;
             transition: background-color 0.5s ease;
             overflow: hidden; /* Prevent scrolling on the body itself */
-      /*      cursor: url('https://n3wgr1d.github.io/__III_III__/_assets/move_red_cursor_32.png'), auto;
+            cursor: url('https://n3wgr1d.github.io/__III_III__/_assets/move_red_cursor_32.png'), auto;
         }
         a {
             color: inherit; /* blue colors for links too */
-      /*       text-decoration: inherit; /* no underline */
-      /*   }
+             text-decoration: inherit; /* no underline */
+         }
         #openFullscreenPage {
             position: fixed;
             top: 50%;
@@ -42,7 +42,7 @@
             transition: background-color 0.6s;
             filter: blur(1px);
             z-index: 5;
-        }*/
+        }
 	    @media (max-width: 768px) {
         #openFullscreenPage {
             box-shadow: none; /* Remove box shadow on mobile devices */
@@ -88,7 +88,7 @@
             text-align: left;
             overflow-y: auto;
         }
-	#threejs-viewer {
+/*	#threejs-viewer {
             position: fixed;
             top: 0;
             right: 0;
@@ -99,7 +99,7 @@
             opacity: 0; /* Start with 0 opacity */
             visibility: hidden; /* Start with hidden */
             transition: opacity 0.5s ease, visibility 0.5s ease; /* Add transition for fading effect */
-        }
+        } 
     </style>
 </head>
 <body>
@@ -122,103 +122,103 @@
         import { OrbitControls } from 'https://unpkg.com/three@0.123.0/examples/jsm/controls/OrbitControls.js';
 
         const updateTasks = {};
-//        let scene, camera, renderer, controls;
+        let scene, camera, renderer, controls;
 
- //       init();
+        init();
 
- //       function init() {
-  //          scene = new Scene();
-  //          camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 10000);
-  //          const angle = Math.PI / 2; // 90 degrees in radians
-  //          const radius = 2; // Distance from the origin
-  //          camera.position.x = Math.sin(angle) * radius;
-   //         camera.position.z = Math.cos(angle) * radius;
-   //         camera.position.y = 0; // Adjust y position if needed
-   //         camera.lookAt(new Vector3(0, 0, 0)); // Ensure camera is looking at the origin
+        function init() {
+            scene = new Scene();
+            camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 10000);
+            const angle = Math.PI / 2; // 90 degrees in radians
+            const radius = 2; // Distance from the origin
+            camera.position.x = Math.sin(angle) * radius;
+            camera.position.z = Math.cos(angle) * radius;
+            camera.position.y = 0; // Adjust y position if needed
+            camera.lookAt(new Vector3(0, 0, 0)); // Ensure camera is looking at the origin
 
-   //         renderer = new WebGLRenderer({ antialias: true });
-     //       renderer.setClearColor(0x000000);
-       //     renderer.setPixelRatio(window.devicePixelRatio);
-         //   renderer.setSize(window.innerWidth, window.innerHeight);
-   //         document.body.appendChild(renderer.domElement);
-     //       window.addEventListener('resize', () => {
-       //         camera.aspect = window.innerWidth / window.innerHeight;
-        //        camera.updateProjectionMatrix();
-          //      renderer.setSize(window.innerWidth, window.innerHeight);
-            //});
+            renderer = new WebGLRenderer({ antialias: true });
+            renderer.setClearColor(0x000000);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
 
             // Add lighting
-    //        const pointLight = new PointLight(0xffffff, 10, 100); // Very bright light at the origin
-      //      pointLight.position.set(0, 0, 0); // Place it at the origin
-        //    scene.add(pointLight);
+            const pointLight = new PointLight(0xffffff, 10, 100); // Very bright light at the origin
+            pointLight.position.set(0, 0, 0); // Place it at the origin
+            scene.add(pointLight);
 
-    //        const ambientLight = new AmbientLight(0xffffff, 0.2); // Add some ambient light
-      //      scene.add(ambientLight);
+            const ambientLight = new AmbientLight(0xffffff, 0.2); // Add some ambient light
+            scene.add(ambientLight);
 
-        //    addModel();
-          //  postUpdate('renderer', () => renderer.render(scene, camera));
+            addModel();
+            postUpdate('renderer', () => renderer.render(scene, camera));
 
-     //       controls = new OrbitControls(camera, renderer.domElement);
-     //       controls.enableZoom = false;
-     //       controls.enablePan = false;
-     //       postUpdate(controls.uuid, controls.update);
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableZoom = false;
+            controls.enablePan = false;
+            postUpdate(controls.uuid, controls.update);
 
-     //       run();
-     //   }
+            run();
+        }
 
-   //     function addModel() {
-     //       fetch("https://n3wgr1d.github.io/__III_III__/_assets/instances_deformed.json").then(r => r.json()).then(async instanceData => {
-     //           let [geometry, texture] = await new Promise(resolve => {
-      //              new ObjectLoader().load('https://n3wgr1d.github.io/__III_III__/_assets/white_sphere.json', mesh => {
-      //                  resolve([mesh.geometry, mesh.material.map]);
-      //              });
-       //         });
+        function addModel() {
+            fetch("https://n3wgr1d.github.io/__III_III__/_assets/instances_deformed.json").then(r => r.json()).then(async instanceData => {
+                let [geometry, texture] = await new Promise(resolve => {
+              new ObjectLoader().load('https://n3wgr1d.github.io/__III_III__/_assets/white_sphere.json', mesh => {
+                        resolve([mesh.geometry, mesh.material.map]);
+                    });
+                });
 
-       //         let material = new ShaderMaterial({
-       //             uniforms: {
-       //                 uTime: { type: 'f', value: 0 },
-       //                 uTexture: { type: 't', value: texture }
-       //             },
-       //             vertexShader: `
-       //                 uniform float uTime;
-       //                 out vec2 vUV;
-       //                 void main() {
-       //                     vUV = uv;
-       //                     vec3 pos = position + vec3(sin(uTime + float(gl_InstanceID)), 0., 0.);
-       //                     gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(pos, 1.0);
-       //                 }`,
-       //             fragmentShader: `
-       //                 uniform float uTime;
-       //                 uniform sampler2D uTexture;
-       //                 in vec2 vUV;
-       //                 void main() {
-       //                     vec4 color = texture(uTexture, vUV);
-       //                     gl_FragColor = color;
-       //                 }`,
-             //   });
+                let material = new ShaderMaterial({
+                    uniforms: {
+                        uTime: { type: 'f', value: 0 },
+                        uTexture: { type: 't', value: texture }
+                    },
+                    vertexShader: `
+                        uniform float uTime;
+                        out vec2 vUV;
+                        void main() {
+                            vUV = uv;
+                            vec3 pos = position + vec3(sin(uTime + float(gl_InstanceID)), 0., 0.);
+                            gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(pos, 1.0);
+                        }`,
+                    fragmentShader: `
+                        uniform float uTime;
+                        uniform sampler2D uTexture;
+                        in vec2 vUV;
+                        void main() {
+                            vec4 color = texture(uTexture, vUV);
+                            gl_FragColor = color;
+                        }`,
+                });
 
-              //  let mesh = new InstancedMesh(geometry, material, instanceData.length);
-              //  let matrix = new Matrix4(1000); // init matrix to assign transforms
-              //  for (let i = 0; i < instanceData.length; i++) {
-                 //   let inst = instanceData[i];
-                 //   let pos = new Vector3(inst["tx"], inst["ty"], inst["tz"]);
-                 //   matrix.setPosition(pos);
-                 //   mesh.setMatrixAt(i, matrix);
-               // }
+                let mesh = new InstancedMesh(geometry, material, instanceData.length);
+                let matrix = new Matrix4(1000); // init matrix to assign transforms
+                for (let i = 0; i < instanceData.length; i++) {
+                    let inst = instanceData[i];
+                    let pos = new Vector3(inst["tx"], inst["ty"], inst["tz"]);
+                    matrix.setPosition(pos);
+                    mesh.setMatrixAt(i, matrix);
+                }
 
-             //   postUpdate(material.uuid, () => material.uniforms.uTime.value += 0.004);
-           //     scene.add(mesh);
-         //   });
-        //}
+                postUpdate(material.uuid, () => material.uniforms.uTime.value += 0.004);
+                scene.add(mesh);
+            });
+        }
 
-        //function postUpdate(uuid, task) {
-         //   updateTasks[uuid] = task; // Each task runs every frame
-        //}
+        function postUpdate(uuid, task) {
+            updateTasks[uuid] = task; // Each task runs every frame
+        }
 
-       // function run() {
-      //      for (let key in updateTasks) { updateTasks[key](); }
-     //       requestAnimationFrame(run);
-    //    }
+        function run() {
+            for (let key in updateTasks) { updateTasks[key](); }
+            requestAnimationFrame(run);
+        }
 		
 		
 		// Second viewer setup
