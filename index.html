@@ -115,56 +115,56 @@
     <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
     <script src="script.js"></script>
     <script type="module">
-        import {
+//        import {
             PerspectiveCamera, Scene, WebGLRenderer, ShaderMaterial, ObjectLoader,
             InstancedMesh, Matrix4, Vector3, PointLight, AmbientLight
         } from 'https://unpkg.com/three@0.123.0/build/three.module.js';
-        import { OrbitControls } from 'https://unpkg.com/three@0.123.0/examples/jsm/controls/OrbitControls.js';
+//        import { OrbitControls } from 'https://unpkg.com/three@0.123.0/examples/jsm/controls/OrbitControls.js';
 
-        const updateTasks = {};
-        let scene, camera, renderer, controls;
+//        const updateTasks = {};
+//        let scene, camera, renderer, controls;
 
-        init();
+ //       init();
 
-        function init() {
-            scene = new Scene();
-            camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 10000);
-            const angle = Math.PI / 2; // 90 degrees in radians
-            const radius = 2; // Distance from the origin
-            camera.position.x = Math.sin(angle) * radius;
-            camera.position.z = Math.cos(angle) * radius;
-            camera.position.y = 0; // Adjust y position if needed
-            camera.lookAt(new Vector3(0, 0, 0)); // Ensure camera is looking at the origin
+ //       function init() {
+  //          scene = new Scene();
+  //          camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 10000);
+  //          const angle = Math.PI / 2; // 90 degrees in radians
+  //          const radius = 2; // Distance from the origin
+  //          camera.position.x = Math.sin(angle) * radius;
+   //         camera.position.z = Math.cos(angle) * radius;
+   //         camera.position.y = 0; // Adjust y position if needed
+   //         camera.lookAt(new Vector3(0, 0, 0)); // Ensure camera is looking at the origin
 
-            renderer = new WebGLRenderer({ antialias: true });
-            renderer.setClearColor(0x000000);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+   //         renderer = new WebGLRenderer({ antialias: true });
+     //       renderer.setClearColor(0x000000);
+       //     renderer.setPixelRatio(window.devicePixelRatio);
+         //   renderer.setSize(window.innerWidth, window.innerHeight);
+   //         document.body.appendChild(renderer.domElement);
+     //       window.addEventListener('resize', () => {
+       //         camera.aspect = window.innerWidth / window.innerHeight;
+        //        camera.updateProjectionMatrix();
+          //      renderer.setSize(window.innerWidth, window.innerHeight);
+            //});
 
             // Add lighting
-            const pointLight = new PointLight(0xffffff, 10, 100); // Very bright light at the origin
-            pointLight.position.set(0, 0, 0); // Place it at the origin
-            scene.add(pointLight);
+    //        const pointLight = new PointLight(0xffffff, 10, 100); // Very bright light at the origin
+      //      pointLight.position.set(0, 0, 0); // Place it at the origin
+        //    scene.add(pointLight);
 
-            const ambientLight = new AmbientLight(0xffffff, 0.2); // Add some ambient light
-            scene.add(ambientLight);
+    //        const ambientLight = new AmbientLight(0xffffff, 0.2); // Add some ambient light
+      //      scene.add(ambientLight);
 
-            addModel();
-            postUpdate('renderer', () => renderer.render(scene, camera));
+        //    addModel();
+          //  postUpdate('renderer', () => renderer.render(scene, camera));
 
-            controls = new OrbitControls(camera, renderer.domElement);
-            controls.enableZoom = false;
-            controls.enablePan = false;
-            postUpdate(controls.uuid, controls.update);
+     //       controls = new OrbitControls(camera, renderer.domElement);
+     //       controls.enableZoom = false;
+     //       controls.enablePan = false;
+     //       postUpdate(controls.uuid, controls.update);
 
-            run();
-        }
+     //       run();
+     //   }
 
    //     function addModel() {
      //       fetch("https://n3wgr1d.github.io/__III_III__/_assets/instances_deformed.json").then(r => r.json()).then(async instanceData => {
