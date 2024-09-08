@@ -242,8 +242,21 @@
             this.echo(separateLine + '\n');
         },
 	visuals: function() {
-                    window.open("_assets/Gallery/gallery.html", "_blank", "fullscreen=yes");
-                },
+    this.echo('[[;#000000;]Choose what you want to see: Type [[;red;]"Videos"] or [[;red;]"Images"]]');
+    this.push(function(choice) {
+        if (choice.toLowerCase() === 'videos') {
+            window.open("_assets/Gallery/gallery.html", "_blank", "fullscreen=yes");
+        } else if (choice.toLowerCase() === 'images') {
+            window.open("https://drive.google.com/file/d/1uf0T1EiBhALLG4i55v9SwIgdJlPDvXte/view?usp=sharing", "_blank");
+        } else {
+            this.echo('[[;red;]Invalid choice. Please type "Videos" or "Images".]');
+        }
+        this.pop();
+    }, {
+        prompt: '[[;#2FFF00;]Your choice>] ',
+        name: 'visual_choice'
+    });
+},
 	return: function() {
             $('#overlay').css({
             opacity: '0',
