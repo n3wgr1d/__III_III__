@@ -190,7 +190,8 @@
             this.echo(greeting + '\n');
         },
         help: function() {
-            this.echo('\n' + separateLine + "\nAvailable commands: \n\n   - [[;black;]help] - List of commands.\n   - [[;black;]visuals] - To view fullres go to contact/patreon.\n   - [[;black;]whoami] - Learn about [[;red;]GRID].\n   - [[;red;]projects] - List of projects.\n   - [[;black;]contact] - Socials and Contact.\n   - [[;#000000;]hours] - Hours of operation.\n   - [[;red;]clear] - Clear the page.\n" + separateLine);
+			this.echo(separateLine);
+            this.echo("[[;#2FFF00;]Available commands:]\n   - [[;black;]help] - List of commands.\n   - [[;black;]visuals] - To view fullres go to contact/patreon.\n   - [[;black;]whoami] - Learn about [[;red;]GRID].\n   - [[;red;]projects] - List of projects.\n   - [[;black;]contact] - Socials and Contact.\n   - [[;#000000;]hours] - Hours of operation.\n   - [[;red;]clear] - Clear the page.\n" + separateLine);
         },
         projects: function() {
             this.echo(separateLine + '\n');
@@ -207,13 +208,15 @@
         },
         
         sudo: function(command) {
-            if (command === "game") {
-                window.open("game/game.html", "_blank", "fullscreen=yes");
-                this.echo("\nThe game has opened in new window\n");
-            } else {
-                this.error('\nCommand not found: ' + command + '\n');
-            }
-        },
+                    if (command === "winxp") {
+                        window.open("https://winxp.now.sh/", "_blank", "fullscreen=yes");
+                        setTimeout(() => {
+                        }, 1000);
+                    } else {
+                        this.error('\nCommand not found: ' + command + '\n');
+                    }
+                },
+
         contact: function() {
             this.echo('\n' + separateLine);
             this.echo("[[;red;][[!;;;;_n3wgr1d_@tuta.io]MAIL]]");
