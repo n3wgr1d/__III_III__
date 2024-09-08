@@ -4,224 +4,104 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@100..900&family=Stick+No+Bills:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@100..900&family=Micro+5+Charted&family=Ojuju:wght@200..800&family=Stick+No+Bills:wght@200..800&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css" />
     <link rel="stylesheet" href="style.css">
+
     <style>
+        /* Global body styling */
         body {
             margin: 0;
             height: 100vh;
-            color: #fff;
-            background: hsl(227, 10%, 10%);
-            text-align: center;
-            transition: background-color 0.5s ease;
-            overflow: hidden; /* Prevent scrolling on the body itself */
-            cursor: url('https://n3wgr1d.github.io/__III_III__/_assets/move_red_cursor_32.png'), auto;
-        }
-        a {
-            color: inherit; /* blue colors for links too */
-             text-decoration: inherit; /* no underline */
-         }
-        #openFullscreenPage {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255,253,253,0.99);
-            border-radius: 150%;
-            border: none;
-            cursor: url('https://n3wgr1d.github.io/__III_III__/_assets/circle-322.ico'), auto; 
-            transition: background-color 0.6s;
-            filter: blur(1px);
-            z-index: 5;
-        }
-	    @media (max-width: 768px) {
-        #openFullscreenPage {
-            box-shadow: none; /* Remove box shadow on mobile devices */
-        }
-    }
-        #overlay {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            cursor: crosshair;
-            backdrop-filter: blur(0px);
+            width: 100vw;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            overflow: hidden; /* Prevent page from scrolling */
+			white-space: nowrap;
+            background: rgba(249, 242, 242, 1.00); /* Background color */
         }
+
+        /* Flexbox container */
         #staticContent {
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: rgba(0, 0, 0, 0.7); 
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0px;
-            overflow: hidden;
-        }
-        .crt {
-            position: relative;
             width: 100%;
             height: 100%;
-            background: rgba(249,242,242,1.00);
-            font-family: 'Courier New', Courier, monospace;
-            padding: 0px;
-            text-align: left;
-            overflow-y: auto;
+			overflow: hidden;
+			white-space: nowrap;
         }
-	#threejs-viewer {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 50%;
+
+        /* Terminal takes up the left side */
+        .crt {
+            width: 50%; /* Adjust this if you want different proportions */
             height: 100%;
+			overflow: hidden;
+            background: rgba(249, 242, 242, 1.00); /* Background color */
+            font-family: 'Courier New', Courier, monospace;
+            text-align: left;
+            overflow-y: hidden;
+            color: black;
+			white-space: nowrap;
+            z-index: 1;
+        }
+		
+		.crt .terminal {
+            overflow: hidden !important; /* Prevent jQuery Terminal from showing the scrollbar */
+            height: 100%; /* Ensure it occupies the full height of the container */
+            white-space: nowrap; /* Prevent text from wrapping and causing overflow */
+        }
+
+        /* Three.js viewer takes up the right side */
+        #threejs-viewer {
+            width: 50%; /* Adjust this if you want different proportions */
+            height: 100%;
+            background: rgba(249, 242, 242); /* Same background color */
             pointer-events: auto;
-            z-index: 100000;
-            opacity: 0; /* Start with 0 opacity */
-            visibility: hidden; /* Start with hidden */
-            transition: opacity 0.5s ease, visibility 0.5s ease; /* Add transition for fading effect */
-        } 
+            opacity: 1;
+            visibility: visible;
+			overflow: hidden;
+			white-space: nowrap;
+            z-index: 10;
+			
+        }
+		
+		/* Scrollbar customization */
+.crt::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+}
+
+/* Track */
+.crt::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track background color */
+}
+
+/* Handle */
+.crt::-webkit-scrollbar-thumb {
+    background: #888; /* Handle color */
+    border-radius: 10px; /* Rounded corners for the scrollbar handle */
+}
+
+/* Handle on hover */
+.crt::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Darker handle when hovered */
+}
     </style>
 </head>
 <body>
-    <div id="overlay">
-        <div id="staticContent">
-            <div id="terminal" class="crt">
-            </div>
-	    <div id="threejs-viewer"></div>
-        </div>
+    <div id="staticContent">
+        <!-- Terminal on the left -->
+        <div id="terminal" class="crt"></div>
+        <!-- Three.js viewer on the right -->
+        <div id="threejs-viewer"></div>
     </div>
-    <button id="openFullscreenPage"></button>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
-    <script src="script.js"></script>
+
     <script type="module">
         import {
-            PerspectiveCamera, Scene, WebGLRenderer, ShaderMaterial, ObjectLoader,
-            InstancedMesh, Matrix4, Vector3, PointLight, AmbientLight
+            PerspectiveCamera, Scene, WebGLRenderer, ObjectLoader, PointLight, AmbientLight
         } from 'https://unpkg.com/three@0.123.0/build/three.module.js';
         import { OrbitControls } from 'https://unpkg.com/three@0.123.0/examples/jsm/controls/OrbitControls.js';
 
-        const updateTasks = {};
-        let scene, camera, renderer, controls;
-
-        init();
-
-        function init() {
-            scene = new Scene();
-            camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 10000);
-            const angle = Math.PI / 2; // 90 degrees in radians
-            const radius = 2; // Distance from the origin
-            camera.position.x = Math.sin(angle) * radius;
-            camera.position.z = Math.cos(angle) * radius;
-            camera.position.y = 0; // Adjust y position if needed
-            camera.lookAt(new Vector3(0, 0, 0)); // Ensure camera is looking at the origin
-
-            renderer = new WebGLRenderer({ antialias: true });
-            renderer.setClearColor(0x000000);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            // Add lighting
-            const pointLight = new PointLight(0xffffff, 10, 100); // Very bright light at the origin
-            pointLight.position.set(0, 0, 0); // Place it at the origin
-            scene.add(pointLight);
-
-            const ambientLight = new AmbientLight(0xffffff, 0.2); // Add some ambient light
-            scene.add(ambientLight);
-
-            addModel();
-            postUpdate('renderer', () => renderer.render(scene, camera));
-
-            controls = new OrbitControls(camera, renderer.domElement);
-            controls.enableZoom = false;
-            controls.enablePan = false;
-            postUpdate(controls.uuid, controls.update);
-
-            run();
-        }
-
-        function addModel() {
-            fetch("https://n3wgr1d.github.io/__III_III__/_assets/instances_deformed.json").then(r => r.json()).then(async instanceData => {
-                let [geometry, texture] = await new Promise(resolve => {
-              new ObjectLoader().load('https://n3wgr1d.github.io/__III_III__/_assets/white_sphere.json', mesh => {
-                        resolve([mesh.geometry, mesh.material.map]);
-                    });
-                });
-
-                let material = new ShaderMaterial({
-                    uniforms: {
-                        uTime: { type: 'f', value: 0 },
-                        uTexture: { type: 't', value: texture }
-                    },
-                    vertexShader: `
-                        uniform float uTime;
-                        out vec2 vUV;
-                        void main() {
-                            vUV = uv;
-                            vec3 pos = position + vec3(sin(uTime + float(gl_InstanceID)), 0., 0.);
-                            gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(pos, 1.0);
-                        }`,
-                    fragmentShader: `
-                        uniform float uTime;
-                        uniform sampler2D uTexture;
-                        in vec2 vUV;
-                        void main() {
-                            vec4 color = texture(uTexture, vUV);
-                            gl_FragColor = color;
-                        }`,
-                });
-
-                let mesh = new InstancedMesh(geometry, material, instanceData.length);
-                let matrix = new Matrix4(1000); // init matrix to assign transforms
-                for (let i = 0; i < instanceData.length; i++) {
-                    let inst = instanceData[i];
-                    let pos = new Vector3(inst["tx"], inst["ty"], inst["tz"]);
-                    matrix.setPosition(pos);
-                    mesh.setMatrixAt(i, matrix);
-                }
-
-                postUpdate(material.uuid, () => material.uniforms.uTime.value += 0.004);
-                scene.add(mesh);
-            });
-        }
-
-        function postUpdate(uuid, task) {
-            updateTasks[uuid] = task; // Each task runs every frame
-        }
-
-        function run() {
-            for (let key in updateTasks) { updateTasks[key](); }
-            requestAnimationFrame(run);
-        }
-		
-		
-		// Second viewer setup
         let scene2, camera2, renderer2, controls2;
         initSecondViewer();
 
@@ -271,40 +151,6 @@
             renderer2.render(scene2, camera2);
         }
 
-        const overlay = document.getElementById('overlay');
-        const btn = document.getElementById('openFullscreenPage');
-        btn.addEventListener('click', function() {
-        const isVisible = overlay.style.opacity === "1";
-        overlay.style.opacity = isVisible ? "0" : "1";
-        overlay.style.visibility = isVisible ? "hidden" : "visible";
-        document.getElementById('threejs-viewer').style.opacity = isVisible ? "0" : "1";
-        document.getElementById('threejs-viewer').style.visibility = isVisible ? "hidden" : "visible";
-        if (!isVisible) {
-        // Initialize terminal when overlay is visible
-        $('#terminal').terminal().clear();
-        $('#terminal').terminal().exec('about');
-        }
-    });
-
-         //jQuery for mouse movement effect on the button
-//         $(document).mousemove(function(e) {
-//    var rXP = (e.pageX - $('#openFullscreenPage').offset().left - $('#openFullscreenPage').width() / 20);
-//    var rYP = (e.pageY - $('#openFullscreenPage').offset().top - $('#openFullscreenPage').height() / 20);
-//    $('#openFullscreenPage').css('box-shadow',
-//        rXP / 40 + 'px ' + rYP / 40 + 'px 2.5px 2.5px rgba(20,20,20,1), ' + 
-//        rXP / 38 + 'px ' + rYP / 38 + 'px 2.5px 2.5px rgba(20,20,20,.95), ' +
-//        rXP / 36 + 'px ' + rYP / 36 + 'px 2.5px 2.5px rgba(42,16,115,.9)');
-//});
-         //       rXP / 34 + 'px ' + rYP / 34 + 'px 2.5px 2.5px rgba(20,20,20,.8), ' +
-         //       rXP / 32 + 'px ' + rYP / 32 + 'px 2px 2px rgba(48,33,94,.7), ' +
-         //       rXP / 30 + 'px ' + rYP / 30 + 'px 2px 2px rgba(42,16,115,.6), ' +
-         //       rXP / 28 + 'px ' + rYP / 28 + 'px 2px 2px rgba(20,20,20,.5), ' +
-         //       rXP / 26 + 'px ' + rYP / 26 + 'px 1.5px 1.5px rgba(20,20,20,.4), ' +
-         //       rXP / 24 + 'px ' + rYP / 24 + 'px 1.5px 1.5px rgba(48,33,94,.3), ' +
-         //       rXP / 22 + 'px ' + rYP / 22 + 'px 1px 1px rgba(20,20,20,.2), ' +
-         //       rXP / 20 + 'px ' + rYP / 20 + 'px 1px 1px rgba(42,16,115,.1)');
-        
-
  
  jQuery(function($) {
     const separateLine = '[[;red;]------------------------------------------------------------]';
@@ -344,7 +190,7 @@
             this.echo(greeting + '\n');
         },
         help: function() {
-            this.echo('\n' + separateLine + "\nAvailable commands: \n\n   - [[;black;]help] - List of commands.\n   - [[;black;]visuals] - To view fullres go to links/patreon.\n   - [[;black;]whoami] - Learn about [[;red;]GRID].\n   - [[;black;]projects] - List of projects.\n   - [[;black;]contact] - Socials and Contact.\n   - [[;#000000;]hours] - Hours of operation.\n   - [[;#2FFF00;]return] - Return to the main page.\n   - [[;red;]clear] - Clear the page.\n" + separateLine);
+            this.echo('\n' + separateLine + "\nAvailable commands: \n\n   - [[;black;]help] - List of commands.\n   - [[;black;]visuals] - To view fullres go to contact/patreon.\n   - [[;black;]whoami] - Learn about [[;red;]GRID].\n   - [[;red;]projects] - List of projects.\n   - [[;black;]contact] - Socials and Contact.\n   - [[;#000000;]hours] - Hours of operation.\n   - [[;red;]clear] - Clear the page.\n" + separateLine);
         },
         projects: function() {
             this.echo(separateLine + '\n');
@@ -370,12 +216,12 @@
         },
         contact: function() {
             this.echo('\n' + separateLine);
-            this.echo("[[;red;][[!;;;;n3wgr1d@tuta.io]MAIL]]");
+            this.echo("[[;red;][[!;;;;_n3wgr1d_@tuta.io]MAIL]]");
             this.echo("[[;red;][[!;;;;https://www.instagram.com/new__grid?igsh=dGU2NWV5ZmoxZGlp]INST]]");
 	    this.echo("[[;red;][[!;;;;https://github.com/n3wgr1d]GIT]]");
 	    this.echo("[[;red;][[!;;;;https://patreon.com/new__grid?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink]PATREON]]");
             this.echo(separateLine);
-		this.echo("[[;red;]if the mail link doesn't work - n3wgr1d@tuta.io]");
+		this.echo("[[;red;]if the mail link doesn't work - _n3wgr1d_@tuta.io]");
 	    this.echo(separateLine + '\n');
         },
         whoami: function() {
