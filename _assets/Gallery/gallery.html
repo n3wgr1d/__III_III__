@@ -6,181 +6,222 @@
     <style>
         body {
             margin: 0;
-            background-color: black;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .gallery-item {
+            position: relative;
             overflow: hidden;
+            background-color: #111;
+            cursor: pointer;
+            transition: transform 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            width: 100vw;
+            width: 100%;
         }
-        .gallery-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .gallery-item {
-            position: relative;
-            display: flex;
-            overflow: hidden;
-        }
-        .gallery-item img,
+
         .gallery-item video {
-            display: block;
+            width: 111%;
+            height: 110%;
+            object-fit: cover;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(220,220,220,1.00);
+            font-size: 20px;
+			font-style: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 70%;
+            height: 70%;
+            background-color: black;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .close-instructions {
+            position: absolute;
+            bottom: 10px;
+			color: grey;
+            font-size: 15px;
+			margin-top: 15px;
+            text-align: bottom;
+        }
+		/* Ensure modal content is responsive */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 90%;
+                height: 90%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="gallery-container" id="gallery-container">
-        <!-- Replace the src attributes with your actual file URLs -->
-        <div class="gallery-item">
-            <img src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/AFTER_GROW.jpg" alt="Image1">
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/3d_imit (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <img src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/AFTER_GROW_EMPTY.jpg" alt="Image2">
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/bucket (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/CHARLES_1 (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <img src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/LOGO_3TRY.jpg" alt="Image3">
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/CHARLES_2 (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/CUBE (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <img src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/luma_1.png" alt="Image4">
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/Middle (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/mouse (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <img src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/YEL.jpg" alt="Image5">
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/mouth (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/pixeldisplace (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/points (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
+
+    <div class="gallery">
+		<div class="gallery-item" data-title="3D Imitation" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/Head_Short.webm">
             <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_1_]</div>
         </div>
-        <div class="gallery-item">
-            <img src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/YEL_SQ.jpg" alt="Image6">
+		
+		<div class="gallery-item" data-title="3D Imitation" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/TopWater2.webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_2_]</div>
         </div>
-        <div class="gallery-item">
-            <img src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/YEL_SQ_2.jpg" alt="Image7">
+		
+		<div class="gallery-item" data-title="pixeldisplace" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/1DisAI (2) (1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_3_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/purple (1).webm" autoplay muted loop playsinline></video>
+		
+		<div class="gallery-item" data-title="UNDER_THE_RAIN" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/UNDER_THE_RAIN (1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_4_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/RAF_1 (1).webm" autoplay muted loop playsinline></video>
+		
+		<div class="gallery-item" data-title="CLOUDS" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/UNDER_THE_RAIN_CLOUDS (1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_5_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/square_disp (1).webm" autoplay muted loop playsinline></video>
+		
+		<div class="gallery-item" data-title="purple" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/purple (1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_6_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/RAF_2 (1).webm" autoplay muted loop playsinline></video>
+		
+		<div class="gallery-item" data-title="posters" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_7_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/TORUS (1).webm" autoplay muted loop playsinline></video>
+		
+		<div class="gallery-item" data-title="square_disp" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/pixeldisplace (1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_8_]</div>
+        </div>		
+		
+		<div class="gallery-item" data-title="mouse" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/mouse (1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_9_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/TDMovieOut.1.mp4" autoplay muted loop playsinline></video>
+		
+        <div class="gallery-item" data-title="Bucket Scene" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/bucket%20(1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_10_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/UNDER_THE_RAIN_CLOUDS (1).webm" autoplay muted loop playsinline></video>
+		
+        <div class="gallery-item" data-title="Charles 1" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/CHARLES_1%20(1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_11_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/UNDER_THE_RAIN (1).webm" autoplay muted loop playsinline></video>
+		
+		<div class="gallery-item" data-title="square_disp" data-video-src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/square_disp (1).webm">
+            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/posters (1).webm" autoplay muted loop playsinline></video>
+            <div class="overlay">[_12_]</div>
         </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/Vert12_Hor (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/vertex_noise (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <video src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/CONVERTED/weird_wiresphere (1).webm" autoplay muted loop playsinline></video>
-        </div>
-        <div class="gallery-item">
-            <img src="https://raw.githubusercontent.com/n3wgr1d/__III_III__/main/_assets/Gallery/assets/RNDM_GEO.jpg" alt="Image8">
+		
+    </div>
+
+    <!-- Modal structure -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <video controls></video>
+            <div class="close-instructions"></div>
         </div>
     </div>
 
     <script>
-        function checkIfLoaded(items, callback) {
-            let loadedItems = 0;
+        // Get modal elements
+        const modal = document.getElementById('videoModal');
+        const modalVideo = modal.querySelector('video');
+        const modalContent = document.querySelector('.modal-content');
 
-            function itemLoaded() {
-                loadedItems++;
-                if (loadedItems === items.length) {
-                    callback();
-                }
+        // Select all videos in the gallery
+        const galleryVideos = document.querySelectorAll('.gallery-item video');
+
+        // Handle gallery item click
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const videoSrc = this.getAttribute('data-video-src');
+
+                // Pause all gallery videos when one is clicked
+                galleryVideos.forEach(video => {
+                    video.pause();
+                });
+
+                // Open the modal and play the clicked video
+                modalVideo.src = videoSrc;
+                modalVideo.play(); // Automatically play the modal video
+                modal.style.display = "flex"; // Show the modal
+            });
+        });
+
+        // Close modal when clicking outside the video content
+        modal.onclick = function(event) {
+            if (event.target !== modalContent && event.target !== modalVideo) {
+                modal.style.display = "none";
+                modalVideo.pause(); // Pause the video when closing the modal
+                modalVideo.src = ""; // Clear the video source
+
+                // Resume playback of the gallery videos
+                galleryVideos.forEach(video => {
+                    video.play();
+                });
             }
-
-            items.forEach(item => {
-                if (item.tagName === 'IMG') {
-                    item.onload = itemLoaded;
-                    item.onerror = itemLoaded;
-                } else if (item.tagName === 'VIDEO') {
-                    item.onloadedmetadata = itemLoaded;
-                    item.onerror = itemLoaded;
-                }
-            });
-        }
-
-        function randomizeItems() {
-            const container = document.getElementById('gallery-container');
-            const items = Array.from(document.querySelectorAll('.gallery-item'));
-            const totalItems = items.length;
-
-            // Calculate rows and columns needed to fit all items
-            const columns = Math.ceil(Math.sqrt(totalItems));
-            const rows = Math.ceil(totalItems / columns);
-            const itemWidth = 100 / columns;
-            const itemHeight = 100 / rows;
-
-            items.forEach((item, index) => {
-                const col = index % columns;
-                const row = Math.floor(index / columns);
-
-                item.style.width = `${itemWidth}vw`;
-                item.style.height = `${itemHeight}vh`;
-                item.style.left = `${col * itemWidth}vw`;
-                item.style.top = `${row * itemHeight}vh`;
-                item.style.position = 'absolute';
-            });
-        }
-
-        window.onload = () => {
-            const items = Array.from(document.querySelectorAll('.gallery-item img, .gallery-item video'));
-            checkIfLoaded(items, randomizeItems);
         };
-
-        window.onresize = randomizeItems;
     </script>
+
 </body>
 </html>
